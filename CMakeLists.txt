@@ -35,7 +35,7 @@ message(STATUS "Eigen Version: ${EIGEN3_VERSION_STRING} (${EIGEN3_INCLUDE_DIRS})
 # 3) External SDKs
 # ROS 1: add_subdirectory(sdk/vicon), add_subdirectory(sdk/optitrack)
 include(cmake/fastrpc.cmake)
-add_subdirectory(sdk/vicon)
+# add_subdirectory(sdk/vicon) # OPTITRACK ONLY
 add_subdirectory(sdk/optitrack)
 
 # ————————————————————————————————
@@ -68,7 +68,7 @@ add_executable(mocap_node
   src/body.cpp
   src/mocap.cpp
   src/rpc_client.cpp
-  src/client/vicon.cpp
+  # src/client/vicon.cpp # OPTITRACK ONLY
   src/client/optitrack.cpp
 )
 
@@ -107,7 +107,7 @@ rosidl_target_interfaces(test_vicon_rpc_node
 
 # SDK libraries from add_subdirectory
 target_link_libraries(mocap_node
-    vicon_sdk
+    # vicon_sdk
     optitrack_sdk
     fastrpc
 )

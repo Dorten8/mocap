@@ -23,7 +23,7 @@ Mocap::Mocap(const std::string& node_name)
   this->declare_parameter<std::string>("body_wrt_mocap_body", "0 0 0 0 0 0");
   this->declare_parameter<bool>("should_pub_unlabeledmarkers", false);
   this->declare_parameter<bool>("should_pub_cameras", false);
-  this->declare_parameter<std::string>("client", "vicon");
+  // this->declare_parameter<std::string>("client", "vicon"); //vicon not needed
 
   // Initialize clients
   if (!init()) {
@@ -230,12 +230,12 @@ bool Mocap::init()
                  [](unsigned char c){ return std::tolower(c); });
 
   if (client == "vicon") {
-    VICON::Parameters params;
-    // ROS1: nhp_.param<std::string>("host", params.host, ...)
-    this->declare_parameter<std::string>("host", "192.168.0.9:801");
-    params.host = this->get_parameter("host").as_string();
+    // VICON::Parameters params;
+    // // ROS1: nhp_.param<std::string>("host", params.host, ...)
+    // this->declare_parameter<std::string>("host", "192.168.0.9:801");
+    // params.host = this->get_parameter("host").as_string();
 
-    client_.reset(new VICON(params));
+    // client_.reset(new VICON(params));
 
   } else if (client == "optitrack") {
     OptiTrack::Parameters params;
@@ -369,7 +369,7 @@ void Mocap::broadcastROS_cameras()
         sensor_msgs::msg::CameraInfo cinfo;
         cinfo.width     = c.image_width;
         cinfo.height    = c.image_height;
-        cinfo.distortion_model = "vicon_radial";
+        // cinfo.distortion_model = "vicon_radial";
         cinfo.d.push_back(c.radial_distortion[0]);
         cinfo.d.push_back(c.radial_distortion[1]);
         cinfo.k[0] = cinfo.k[4] = c.focal_length;

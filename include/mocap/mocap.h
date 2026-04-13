@@ -24,7 +24,7 @@
 #include "mocap/body.h"
 #include "mocap/rpc_client.h"
 #include "mocap/client.h"
-#include "mocap/client/vicon.h"
+// #include "mocap/client/vicon.h" // Vicon SDK disabled
 #include "mocap/client/optitrack.h"
 
 namespace acl {
